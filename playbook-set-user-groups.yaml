@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Add the user 'ansible' with a specific uid and a primary group of 'wheel'
+      ansible.builtin.user:
+        name: ansible
+        group: wheel
+...

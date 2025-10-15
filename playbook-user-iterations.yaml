@@ -1,0 +1,26 @@
+---
+- hosts: servers
+  become: true
+  vars:
+    names:
+      - name: marek
+        uid: 1045
+        shell: /bin/bash
+        comment: good
+      - name: stano
+        uid: 1256
+        shell: /bin/nologin
+        comment: neutral
+      - name: kubo
+        uid: 1456
+        shell: /bin/sh
+        comment: very bad
+  tasks:
+    - name: Add users
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid }}"
+        shell: "{{ item.shell }}"
+        comment: "{{ item.comment }}"
+      with_items: "{{ names }}"
+...

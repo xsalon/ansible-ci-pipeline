@@ -1,0 +1,23 @@
+---
+- hosts: webservers
+  become: true
+  tasks:
+    - name: Install httpd
+      ansible.builtin.dnf:
+        name: httpd
+        state: latest
+- hosts: dbservers
+  become: true
+  tasks:
+    - name: Install mariadb
+      ansible.builtin.dnf:
+        name: mariadb-server
+        state: latest
+- hosts: fileservers
+  become: true
+  tasks:
+    - name: Install nfs-utils
+      ansible.builtin.dnf:
+        name: nfs-utils
+        state: latest
+...

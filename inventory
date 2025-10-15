@@ -1,0 +1,20 @@
+[servers:children]
+webservers
+dbservers
+fileservers
+
+[webservers]
+pc0
+
+[dbservers]
+pc1
+
+[fileservers]
+pc2
+
+[containers]
+container1 ansible_host=10.2.20.52 ansible_port=2025
+container2 ansible_host=10.2.20.52 ansible_port=2026
+container3 ansible_host=10.2.20.52 ansible_port=2027
+container4 ansible_host=10.2.20.52 ansible_port=2028
+container5 ansible_host=10.2.20.52 ansible_port=2029

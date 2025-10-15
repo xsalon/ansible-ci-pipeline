@@ -1,0 +1,13 @@
+---
+- hosts: servers
+  become: true
+  tasks:
+    - name: "Install packages"
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: installed
+      with_items:
+        - net-tools
+        - nfs-utils
+        - nmap
+...

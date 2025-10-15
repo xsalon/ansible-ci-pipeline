@@ -1,0 +1,24 @@
+---
+- hosts: containers
+  become: true
+  tasks:
+    - name: Get system info
+      ansible.builtin.setup:
+    - name: Calculate uptime in days, hours, minutes
+      set_fact:
+        uptime_days: "{{ (ansible_uptime_seconds // 86400) }}"
+        uptime_hours: "{{ (ansible_uptime_seconds % 86400) // 3600 }}"
+        uptime_minutes: "{{ (ansible_uptime_seconds % 3600) // 60 }}"
+    - name: Write output
+      ansible.builtin.debug:
+        msg:
+          - "CPU CORES: {{ ansible_facts['processor_cores'] }}"
+          - "TOTAL RAM: {{ ansible_facts['memtotal_mb'] }} MB"
+          - "FREE RAM: {{ ansible_facts['memfree_mb'] }} MB"
+          - "KERNEL VERSION: {{ ansible_facts['kernel'] }}"
+          - "UPTIME: {{ uptime_days }}d {{ uptime_hours }}h {{ uptime_minutes }}m"
+          - "DISTRIBUTION: {{ ansible_facts['distribution'] }}"
+          - "VERSION: {{ ansible_facts['distribution_version'] }}"
+          - "ROOT LV SIZE: {{ (ansible_facts['mounts'][0]['size_total']/1000000000) | round(2) }} GB"
+          - "ROOT LV FREE SPACE: {{ (ansible_facts['mounts'][0]['size_available']/1000000000) | round(2) }} GB"
+...

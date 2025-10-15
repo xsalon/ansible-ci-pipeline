@@ -1,0 +1,13 @@
+names:
+  - name: marek
+    uid: 1045
+    shell: /bin/bash
+    comment: good
+  - name: stano
+    uid: 1256
+    shell: /bin/nologin
+    comment: neutral
+  - name: kubo
+    uid: 1456
+    shell: /bin/sh
+    comment: very bad

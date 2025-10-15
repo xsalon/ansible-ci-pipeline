@@ -1,0 +1,30 @@
+---
+- hosts: servers
+  become: true
+  vars_prompt:
+    - name: "meno"
+      prompt: "Name please?"
+      private: false
+    - name: "shell"
+      prompt: "(S)hell?"
+      default: "/bin/bash"
+      private: false
+    - name: "uid"
+      prompt: "UID?"
+      private: false
+    - name: "password"
+      prompt: "Password please?"
+      private: yes
+      encrypt: "sha512_crypt"
+      confirm: yes
+      salt_size: 7
+  tasks:
+    - name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+      ansible.builtin.user:
+        name: "{{ meno }}"
+        shell: "{{ shell }}"
+        uid: "{{ uid }}"
+        password: "{{ password }}"
+        state: present
+      when: meno and shell and uid and password
+...

@@ -1,0 +1,4 @@
+---
+- name: Zobraz hlasku
+  ansible.builtin.debug:
+    msg: "Testovanie role"

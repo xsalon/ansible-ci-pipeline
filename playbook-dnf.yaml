@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  become: true
+  tasks:
+    - name: Install epel
+      ansible.builtin.dnf:
+        name: epel-release
+        state: latest
+    - name: Install xclock
+      ansible.builtin.dnf:
+        name: xclock
+        state: latest
+...

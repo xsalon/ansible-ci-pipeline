@@ -1,0 +1,13 @@
+---
+- hosts: servers
+  become: true
+  vars:
+    to_be_installed: true
+    really_install: "ano"
+  tasks:
+    - name: "Install {{ package_to_install }}"
+      ansible.builtin.dnf:
+        name: "{{ package_to_install }}"
+        state: present
+      when: to_be_installed and really_install == "ano"
+...

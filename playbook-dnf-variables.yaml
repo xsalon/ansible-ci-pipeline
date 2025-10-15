@@ -1,0 +1,16 @@
+---
+- hosts: servers
+  become: true
+  vars_prompt:
+    - name: "package_to_install"
+      prompt: "package"
+  tasks:
+    - name: "Install package {{ package_to_install }}"
+      ansible.builtin.dnf:
+        name: "{{ package_to_install }}"
+        state: latest
+      register: result
+    - name: Write output
+      ansible.builtin.debug:
+        msg: "MODULE RESULT: {{ result }}"
+...
